@@ -18,6 +18,7 @@ pic_cur = "" # Имя текущего файла
 img = ""     # Объект изображения в Canvas
 frame_xy = [0, 0, 0, 0]
 frame = ""
+image = ""
 h_crop = 1
 w_crop = 1
 canvas_width = 800
