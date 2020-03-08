@@ -38,8 +38,6 @@ def next_image(event=1):
 
     # Если выбрано изображение (и оно на экране 0_o)
     if pic_cur:
-        # убираем его
-        c.delete(img)
         # переносим файл с картинкой в папку out
         pic_input_path = os.path.sep.join([input_path, pic_cur])
         pic_out_path = os.path.sep.join([output_path, pic_cur])
@@ -57,13 +55,14 @@ def next_image(event=1):
             crop_coord.append(frame_xy[3] * h_crop)
             # дописываем координаты в файл, завершаем строку
             f.write("{},{},{},{}\n".format(*crop_coord))
-        # сбрасываем выбранную картинку
+        # сбрасываем переменную с текущей картинкой
         pic_cur = ""
-        # TODO: canvas del all
+        # удаляем изображение и рамку с холста
         c.delete(img)
         c.delete(frame)
+        # TODO: canvas del all
 
-    # Еслив списке есть картинки
+    # Если в списке есть картинки
     if pic_list:
         # Достаём одну
         pic_cur = pic_list.pop()
@@ -71,7 +70,7 @@ def next_image(event=1):
         pilImage = Image.open(pic_path)
 
         # картинки отображаются на экране не в полный размер
-        # вычисляем отношения реальных высоты и ширины к отображаемым
+        # вычисляем отношения реальных высоты и ширины к отображаемым,
         # чтобы потом масштабировать рамку
         h_crop = pilImage.height / canvas_height
         w_crop = pilImage.width / canvas_width
